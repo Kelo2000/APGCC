@@ -2,7 +2,7 @@ TAG: 'APGCC_SHHA'
 SEED: 1229                                  # seed
 GPU_ID: 0                                   # gpu_id, the gpu used for training
 OUTPUT_DIR: './output/'                     # output_dir, path where to save, empty for no saving
-VIS: False                                  # vis the predict sample
+VIS: True                                  # vis the predict sample
 
 # -----------------------------------------------------------------------------
 # MODEL
@@ -47,7 +47,7 @@ RESUME_PATH: '' # keep training weights.
 # -----------------------------------------------------------------------------
 DATASETS:
   DATASET: 'SHHA' # dataset_file
-  DATA_ROOT: '/mnt/191/c/CrowdCounting/Dataset/ShanghaiTech/PointData/part_A' # data_root, path where the dataset is
+  DATA_ROOT: '/home/lukelo/APGCC/data/part_A' # data_root, path where the dataset is
 
 # -----------------------------------------------------------------------------
 # DATALOADER

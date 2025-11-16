@@ -1,6 +1,8 @@
 import os, sys 
 import logging
-
+from torchvision import transforms as standard_transforms
+import numpy as np
+import cv2
 ################################################
 ## Record Logger:
 ## 1. setup_logger, writer recorder.
@@ -101,7 +103,7 @@ def vis(samples, targets, pred, vis_dir, des=None):
             sample_gt = cv2.circle(sample_gt, (int(t[0]), int(t[1])), size, (0, 255, 0), -1)
         # draw predictions
         for p in pred[idx]:
-            sample_pred = cv2.circle(sample_pred, (int(p[0]), int(p[1])), size, (0, 0, 255), -1)
+            sample_pred = cv2.circle(sample_pred, (int(p[0]), int(p[1])), size, (0, 255, 0), -1)
 
         name = targets[idx]['image_id']
         # save the visualized images
@@ -117,3 +119,18 @@ def vis(samples, targets, pred, vis_dir, des=None):
             cv2.imwrite(
                 os.path.join(vis_dir, '{}_gt_{}_pred_{}_pred.jpg'.format(int(name), len(gts[idx]), len(pred[idx]))),
                 sample_pred)
+
+        # --- save coordinates: predictions (and optionally GT) ---
+        # predictions txt: one "x y" per line with 3 decimals
+        gt_pts = np.asarray(gts[idx], dtype=float)                     # (M,2)
+        pred_pts = np.asarray(pred[idx], dtype=float) 
+        if des is not None:
+            pred_txt_path = os.path.join(vis_dir, f"{name}_{des}_pred_{len(pred_pts)}.txt")
+            # gt_txt_path   = os.path.join(vis_dir, f"{name}_{des}_gt_{len(gt_pts)}.txt")   # (optional)
+        else:
+            pred_txt_path = os.path.join(vis_dir, f"{name}_pred_{len(pred_pts)}.txt")
+            # gt_txt_path   = os.path.join(vis_dir, f"{name}_gt_{len(gt_pts)}.txt")         # (optional)
+
+        with open(pred_txt_path, "w") as f:
+            for x, y in pred_pts:
+                f.write(f"{x:.4f} {y:.4f}\n")

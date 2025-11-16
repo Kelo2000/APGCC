@@ -1,0 +1,21 @@
+2025-11-15 23:35:23,735 AGPCC INFO: Using 1 GPUS
+2025-11-15 23:35:23,736 AGPCC INFO: Running with config:
+{'TAG': 'APGCC_SHHA', 'SEED': 1229, 'GPU_ID': 0, 'OUTPUT_DIR': '/home/lukelo/APGCC/apgcc/output', 'VIS': True, 'MODEL': {'ENCODER': 'vgg16_bn', 'ENCODER_kwargs': {'last_pool': False}, 'DECODER': 'IFI', 'DECODER_kwargs': {'num_classes': 2, 'inner_planes': 64, 'feat_layers': [3, 4], 'pos_dim': 32, 'ultra_pe': True, 'learn_pe': False, 'unfold': False, 'local': True, 'no_aspp': False, 'require_grad': True, 'out_type': 'Normal', 'head_layers': [1024, 512, 256, 256]}, 'STRIDE': 8, 'ROW': 2, 'LINE': 2, 'FROZEN_WEIGHTS': None, 'POINT_LOSS_COEF': 0.0002, 'EOS_COEF': 0.5, 'LOSS': ['L2'], 'WEIGHT_DICT': {'loss_ce': 1, 'loss_points': 0.0002, 'loss_aux': 0.2}, 'AUX_EN': True, 'AUX_NUMBER': [2, 2], 'AUX_RANGE': [2, 8], 'AUX_kwargs': {'pos_coef': 1.0, 'neg_coef': 1.0, 'pos_loc': 0.0002, 'neg_loc': 0.0002}}, 'RESUME': False, 'RESUME_PATH': '', 'DATASETS': {'DATASET': 'SHHA', 'DATA_ROOT': '/home/lukelo/APGCC/data/part_A'}, 'DATALOADER': {'AUGUMENTATION': ['Normalize', 'Crop', 'Flip'], 'CROP_SIZE': 128, 'CROP_NUMBER': 4, 'UPPER_BOUNDER': -1, 'NUM_WORKERS': 0}, 'SOLVER': {'BATCH_SIZE': 8, 'START_EPOCH': 0, 'EPOCHS': 3500, 'LR': 0.0001, 'LR_BACKBONE': 1e-05, 'WEIGHT_DECAY': 0.0001, 'LR_DROP': 3500, 'CLIP_MAX_NORM': 0.1, 'EVAL_FREQ': 1, 'LOG_FREQ': 1}, 'MATCHER': {'SET_COST_CLASS': 1.0, 'SET_COST_POINT': 0.05}, 'TEST': {'THRESHOLD': 0.5, 'WEIGHT': './output/SHHA_best.pth'}, 'config_file': './configs/SHHA_test.yml', 'test': True}
+2025-11-15 23:35:23,736 AGPCC INFO: ##############################################################
+2025-11-15 23:35:23,737 AGPCC INFO: # % TEST .....  
+2025-11-15 23:35:23,737 AGPCC INFO: # Config is {./configs/SHHA_test.yml}
+2025-11-15 23:35:23,737 AGPCC INFO: # SEED is {1229}
+2025-11-15 23:35:23,738 AGPCC INFO: # DATASET is {SHHA}
+2025-11-15 23:35:23,738 AGPCC INFO: # DATA_RT is {/home/lukelo/APGCC/data/part_A}
+2025-11-15 23:35:23,738 AGPCC INFO: # MODEL.ENCODER is {vgg16_bn}
+2025-11-15 23:35:23,739 AGPCC INFO: # MODEL.DECODER is {IFI}
+2025-11-15 23:35:23,739 AGPCC INFO: # RESUME is {False}
+2025-11-15 23:35:23,739 AGPCC INFO: # BATCH is {8*2*2}
+2025-11-15 23:35:23,739 AGPCC INFO: # OUTPUT_DIR is {/home/lukelo/APGCC/apgcc/output}
+2025-11-15 23:35:23,740 AGPCC INFO: # RESULT_DIR is {/home/lukelo/APGCC/apgcc/output/SHHA_0.50}
+2025-11-15 23:35:23,740 AGPCC INFO: ##############################################################
+2025-11-15 23:35:23,740 AGPCC INFO: Eval Log Sat Nov 15 23:35:23 2025
+2025-11-15 23:35:26,882 AGPCC INFO: number of params:17750480 
+
+2025-11-15 23:36:31,744 AGPCC INFO: Eval: MAE=51.338798, MSE=85.874766 time:64.70s 
+
