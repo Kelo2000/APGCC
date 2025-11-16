@@ -163,7 +163,10 @@ def test(cfg):
     n_parameters = sum(p.numel() for p in model.parameters() if p.requires_grad)
     logger.info('number of params:%d \n' % n_parameters)
 
-    pretrained_dict = torch.load(os.path.join(source_dir, 'best.pth'), map_location='cpu')
+    weight_path = cfg.TEST.WEIGHT if cfg.TEST.WEIGHT not in [None, ""] else os.path.join(source_dir, 'best.pth')
+    if not os.path.exists(weight_path):
+        raise FileNotFoundError('Cannot find pretrained weights at {}'.format(weight_path))
+    pretrained_dict = torch.load(weight_path, map_location='cpu')
     model_dict = model.state_dict()
     param_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict.keys()}
     model_dict.update(param_dict)
