@@ -1,0 +1,16 @@
+data/
+shha/
+apgcc/outputs/
+**/__pycache__/**
+**.pyc
+**/__pycache__
+__pycache__/config.cpython-38.pyc
+**/__pycache__/**
+# Compiled python files
+*.pyc
+
+# Python cache directory
+__pycache__/
+apgcc/outputs/best.pth
+apgcc/custom_data/
+output/
