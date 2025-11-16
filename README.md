@@ -72,13 +72,30 @@ x2 y2
 - For SHHA dataset:
 ```
 cd apgcc
-bash test.sh 
+bash test.sh
 ```
 In default, the results will be saved to "./output/", and you can customize the inference by the command.
 ```
 python main.py -t -c $[config] TEST.WEIGHT $[checkpoint] OUTPUT_DIR $[output path] TEST.THRESHOLD $[threshold]
 ```
 where \[config\] specifies the initial configuration and defaults as "./configs/SHHA_test.yml", \[checkpoint\] is your pretrained checkpoint, \[output path\] specifies the output folder, and \[threshold\] can filter different confidence levels. The more configure instruction please see the "./configs/SHHA_test.yml" files.
+
+### Inference on an arbitrary image folder
+You can now point the pretrained APGCC model to any folder of crowd images and obtain a predicted count for each file. The helper script automatically fabricates SHHA-style metadata so that no manual annotation effort is needed.
+
+```
+python apgcc/scripts/run_folder_inference.py \
+    --images_dir /path/to/images \
+    --checkpoint ./apgcc/output/SHHA_best.pth \
+    --working_dir ./apgcc/custom_data \
+    --output_dir ./apgcc/output \
+    --results_json ./apgcc/output/custom_predictions.json
+```
+
+Key notes:
+- The script mirrors the same inference path as `test.sh` but dynamically builds the SHHA `train.list`/`test.list` files around your folder. Random synthetic points are generated for each image to satisfy the dataset loader, yet the final counts strictly come from APGCC's predictions.
+- The `--min_random_points`/`--max_random_points` flags control how many synthetic annotations are produced per image (defaults: 0–10). The random seed can be set with `--seed` for reproducibility, which is convenient inside a Jupyter notebook.
+- When `--results_json` is provided, the per-image counts (and the predicted point coordinates) are saved, making it easy to load them back into a notebook for visualization.
 
 ## Performance
 <img width="380" alt="image" src='figures/teaser3.jpg'><img width="380" alt="image" src='figures/teaser4.jpg'>
